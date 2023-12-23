@@ -1,0 +1,112 @@
+<div class="w-full p-3 flex justify-center">
+  <!-- card -->
+  <div
+    @fadeInUp
+    class="rounded-lg p-3 border-2 w-full bg-white md:w-1/2 lg:w-1/3"
+  >
+    <!-- logo -->
+    <img
+      src="assets/logo/logo-dark.png"
+      class="h-20 w-20 rounded-full"
+      alt="logo"
+    />
+
+    <!-- title -->
+    <div class="text-xl font-bold mt-8">Register</div>
+    <span class="text-sm font-sans">Already have an account ? </span>
+    <a
+      class="text-cyan-600 font-semibold"
+      routerLinkActive="active"
+      [routerLink]="['/login']"
+      >login</a
+    >
+    <!-- form -->
+    <form
+      [formGroup]="registerForm"
+      class="space-y-1 flex flex-col justify-center mt-8"
+    >
+      <!-- email -->
+      <mat-form-field class="w-full">
+        <mat-label>Email</mat-label>
+        <mat-icon matPrefix [fontIcon]="'person'"></mat-icon>
+        <input
+          type="email"
+          matInput
+          [formControlName]="'email'"
+          placeholder="Ex. name@domain.suffix"
+          [autocomplete]="true"
+        />
+        <mat-error>
+          {{ getError('email') }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- password -->
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <mat-icon matPrefix [fontIcon]="'lock'" />
+        <input
+          type="password"
+          matInput
+          [formControlName]="'password'"
+          placeholder="Password"
+          [autocomplete]="true"
+        />
+        <mat-error>
+          {{ getError('password') }}
+        </mat-error>
+      </mat-form-field>
+
+      @if (errorMessage) {
+      <div class="text-sm text-red-500">{{ errorMessage }}</div>
+      }
+    </form>
+
+    <!-- submit -->
+    <button
+      class="w-full mt-4 bg-green-100"
+      [disabled]="registerForm.invalid || registerForm.disabled"
+      mat-raised-button
+      (click)="registerEmail()"
+    >
+      @if (isSpin) {
+      <ui-common-spinner />
+      } @else { Register }
+    </button>
+
+    <!-- OAuth 2 -->
+    <div class="w-full text-center underline text-lg font-semibold mt-8 mb-4">
+      Or
+    </div>
+    <div class="flex flex-row justify-center space-x-4">
+      <!-- google -->
+      <button
+        [disabled]="isSpin || registerForm.disabled"
+        class="cursor-pointer"
+        (click)="registerGoogle()"
+      >
+        <img
+          src="assets/icons/google-cloud.icon.svg"
+          width="100"
+          class="w-16 h-16"
+          height="100"
+          alt="google"
+        />
+      </button>
+      <!-- github -->
+      <button
+        [disabled]="isSpin || registerForm.disabled"
+        class="cursor-pointer"
+        (click)="registerGithub()"
+      >
+        <img
+          src="assets/icons/github-cloud.icon.svg"
+          width="100"
+          class="w-16 h-16"
+          height="100"
+          alt="github"
+        />
+      </button>
+    </div>
+  </div>
+</div>

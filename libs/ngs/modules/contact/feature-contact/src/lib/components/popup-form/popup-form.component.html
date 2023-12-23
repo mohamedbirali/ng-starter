@@ -1,0 +1,52 @@
+<h1 mat-dialog-title class="font-bold">
+  {{ data.actionName | titlecase }} contact
+</h1>
+<mat-dialog-content class="p-0 w-[20rem] md:w-[40rem]">
+  <form
+    class="flex flex-col flex-0 items-start w-full p-6 sm:p-8 space-y-6 overflow-y-auto"
+    [formGroup]="contactForm"
+  >
+    <!-- Title -->
+    <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+      <mat-label>Name</mat-label>
+      <input matInput [formControlName]="'name'" />
+    </mat-form-field>
+
+    <!-- Color -->
+    <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+      <mat-label>Color</mat-label>
+      <input
+        matInput
+        type="color"
+        [formControlName]="'color'"
+        class="w-6 h-6 rounded-full"
+      />
+    </mat-form-field>
+
+    <!-- Phone -->
+    <ui-common-phone
+      class="w-full"
+      [phoneNumber]="data?.type?.phone"
+      (phoneNumberValue)="patchPhoneNumber($event)"
+    />
+    <!-- <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+      <mat-label>Phone</mat-label>
+      <input matInput [formControlName]="'phone'" />
+    </mat-form-field> -->
+
+    <!-- toggle -->
+    <mat-slide-toggle [formControlName]="'toggle'">Toggle </mat-slide-toggle>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    [disabled]="contactForm.invalid"
+    (click)="edit()"
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    {{ data.actionName }}
+  </button>
+</mat-dialog-actions>

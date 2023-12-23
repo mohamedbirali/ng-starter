@@ -1,0 +1,37 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@auth/data-access-auth": ["libs/auth/data-access-auth/src/index.ts"],
+      "@common/ui-common": ["libs/common/ui-common/src/index.ts"],
+      "@feature-common": ["libs/common/feature-common/src/index.ts"],
+      "@firebase": ["libs/common/firebase/src/index.ts"],
+      "@ngs/feature-auth": ["libs/auth/feature-auth/src/index.ts"],
+      "@ngs/feature-contact": [
+        "libs/ngs/modules/contact/feature-contact/src/index.ts"
+      ],
+      "@ngs/modules/data-access-scrumboard": [
+        "libs/ngs/modules/scrumboard/data-access-scrumboard/src/index.ts"
+      ],
+      "@ngs/modules/scrumboard/feature-scrumboard": [
+        "libs/ngs/modules/scrumboard/feature-scrumboard/src/index.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

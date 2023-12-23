@@ -1,0 +1,96 @@
+<div class="flex flex-col min-w-0 overflow-y-auto" cdkScrollable>
+  <!-- Main -->
+  <div class="flex flex-col flex-auto items-center p-4 sm:p-10">
+    <!-- Title -->
+    <div
+      class="mt-4 md:mt-4 text-3xl md:text-6xl font-extrabold tracking-tight leading-7 sm:leading-10"
+    >
+      Scrumboard Boards
+    </div>
+
+    <!-- Boards -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8 md:mt-16"
+    >
+      @if(!boards) { @for (i of [1, 2, 3, 4]; track i) {
+      <div class="shadow rounded-md p-4 w-full flex justify-center h-60">
+        <div class="animate-pulse flex space-x-4">
+          <div class="rounded-full bg-slate-700 h-20 w-20"></div>
+          <div class="flex-1 space-y-6 py-1">
+            <div class="h-2 bg-slate-700 rounded-sm"></div>
+            <div class="space-y-3">
+              <div class="grid grid-cols-3 gap-4">
+                <div class="h-2 bg-slate-700 rounded col-span-2"></div>
+                <div class="h-2 bg-slate-700 rounded col-span-1"></div>
+              </div>
+              <div class="h-2 bg-slate-700 rounded"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      } } @else {
+      <!-- New board -->
+      <div
+        class="flex flex-col items-center justify-center w-56 rounded-lg cursor-pointer border-2 border-gray-300 border-dashed hover:bg-hover transition-colors duration-150 ease-in-out"
+        (click)="openAddBoard()"
+      >
+        <span class="text-4xl"> + </span>
+      </div>
+      <ng-container *ngFor="let board of boards; trackBy: trackByFn">
+        <a
+          class="flex flex-col items-start w-56 p-6 shadow bg-white rounded-lg hover:shadow-xl transition-shadow duration-150 ease-in-out"
+          [routerLink]="[board.id]"
+        >
+          <div
+            class="flex items-center justify-center p-4 rounded-full bg-green-100 dark:bg-primary dark:text-on-primary"
+          >
+            <mat-icon class="text-current" [fontIcon]="board!.icon!"></mat-icon>
+          </div>
+          <!-- Title -->
+          <div class="mt-5 text-lg font-medium leading-5">
+            {{ board.title }}
+          </div>
+          <!-- Description -->
+          <div class="mt-0.5 line-clamp-2 text-secondary">
+            {{ board.description }}
+          </div>
+          <!-- Members -->
+          <ng-container *ngIf="board.members?.length">
+            <div class="w-12 h-1 mt-6 border-t-2"></div>
+            <div class="flex items-center mt-6 -space-x-1.5" @fadeInUp>
+              <ng-container
+                *ngFor="
+                  let member of board.members.slice(0, 5);
+                  trackBy: trackByFn
+                "
+              >
+                <img
+                  class="flex-0 w-8 h-8 rounded-full ring ring-offset-1 ring-white ring-offset-transparent object-cover"
+                  [src]="member.avatar"
+                  [alt]="member.name"
+                />
+              </ng-container>
+              <ng-container *ngIf="board.members.length > 5">
+                <div
+                  class="flex flex-0 items-center justify-center w-8 h-8 rounded-full ring ring-offset-1 ring-bg-card ring-offset-transparent bg-gray-200 text-gray-500"
+                >
+                  <div class="text-md font-semibold">
+                    +{{ board.members.slice(5).length }}
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+          <!-- Last activity -->
+          <div class="flex items-center mt-4 text-md font-md">
+            <div class="text-secondary">Edited:</div>
+            <div class="ml-1">
+              {{ formatDateAsRelative(board.lastActivity ?? '') }}
+            </div>
+          </div>
+        </a>
+      </ng-container>
+      }
+    </div>
+  </div>
+</div>

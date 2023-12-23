@@ -1,0 +1,45 @@
+<div class="w-full flex justify-end p-4">
+  @if (!isSpin) {
+  <mat-icon
+    (click)="logout()"
+    class="rotate-180 cursor-pointer"
+    fontIcon="logout"
+    matTooltip="Logout"
+    [matTooltipPosition]="'left'"
+  />
+  } @else {
+  <ui-common-spinner />
+  }
+</div>
+
+<div class="w-full flex justify-center p-4">
+  <img
+    height="100"
+    width="100"
+    [matTooltip]="user?.displayName ?? ''"
+    [matTooltipPosition]="'above'"
+    [src]="user?.photoURL"
+    class="rounded-full"
+    alt="User avatar"
+  />
+</div>
+<mat-nav-list class="w-full divide-y py-0 border-y">
+  @for (link of routes; track link) {
+  <a
+    mat-list-item
+    [ngClass]="
+      (link.route | lowercase) === (router.url.split('/')[1] | lowercase)
+        ? 'border-r-2 border-r-emerald-400'
+        : ''
+    "
+    [routerLink]="link.route | lowercase"
+    [activated]="
+      (link.route | lowercase) === (router.url.split('/')[1] | lowercase)
+    "
+    class="font-semibold"
+    (click)="onToggle()"
+  >
+    {{ link.name | titlecase }}
+  </a>
+  }
+</mat-nav-list>

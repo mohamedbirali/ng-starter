@@ -1,0 +1,13 @@
+{
+  "name": "@ngs/feature-auth",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "@angular/core": "^17.0.0",
+    "@angular/forms": "17.0.0",
+    "@angular/material": "^17.0.1",
+    "@angular/router": "17.0.0",
+    "@common/ui-common": "1.0.0"
+  },
+  "dependencies": {},
+  "sideEffects": false
+}

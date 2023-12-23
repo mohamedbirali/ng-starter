@@ -1,0 +1,79 @@
+import { Injectable, inject } from '@angular/core';
+import {
+  Database,
+  DatabaseReference,
+  child,
+  databaseInstance$,
+  fromRef,
+  get,
+  getDatabase,
+  limitToFirst,
+  limitToLast,
+  list,
+  listVal,
+  object,
+  objectVal,
+  push,
+  query,
+  ref,
+  remove,
+  set,
+  update,
+} from '@angular/fire/database';
+import { faker } from '@faker-js/faker';
+
+@Injectable()
+export class FirebaseRealtimeService {
+  readonly #chats: string = 'chats';
+
+  #_database = inject(Database);
+  #_ref: DatabaseReference = ref(this.#_database, 'chats');
+  #_id!: string;
+
+  readDatabase$() {
+    listVal(this.#_ref);
+    // .subscribe(
+    //   (r) => (r)
+    // );
+  }
+
+  addObject() {
+    this.#_id = push(ref(this.#_database)).key ?? '';
+
+    this.#_ref = ref(this.#_database, `${this.#chats}/${this.#_id}`);
+
+    set(this.#_ref, {
+      message: faker.lorem.sentence(),
+      seen: faker.datatype.boolean(),
+      someNumber: faker.number.int({ min: 10, max: 200 }),
+    });
+    // .then()
+  }
+
+  updateObject() {
+    set(this.#_ref, {
+      message: faker.lorem.sentence(),
+      seen: faker.datatype.boolean(),
+      someNumber: faker.number.int({ min: 10, max: 200 }),
+      updated: true,
+    });
+  }
+
+  deleteObject() {
+    remove(this.#_ref);
+  }
+
+  queryObjects() {
+    // query(this.#_ref, limitToFirst(3)).ref
+    // get(child(dbRef, `users/$id`))
+
+    listVal(
+      query(ref(this.#_database, `${this.#chats}`), limitToLast(3)),
+      // ref(this.#_database, `${this.#chats}`),
+    ).subscribe((v) => v);
+  }
+
+  transctionalObjects<N>(entity: N[]) {
+    return true;
+  }
+}

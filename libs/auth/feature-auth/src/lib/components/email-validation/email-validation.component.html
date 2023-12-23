@@ -1,0 +1,58 @@
+<div class="w-full p-3 flex justify-center">
+  <!-- card -->
+  <div
+    @fadeInUp
+    class="rounded-lg p-3 border-2 w-full bg-white md:w-1/2 lg:w-1/3"
+  >
+    <!-- if error occurs -->
+    <!-- {{ errorMessage }} -->
+    <!-- logo -->
+    <img
+      src="assets/logo/logo-dark.png"
+      class="h-20 w-20 rounded-full"
+      alt="logo"
+    />
+
+    <!-- title -->
+    <div class="text-xl font-bold mt-8">Email validation</div>
+    Back ?
+    <a
+      class="text-cyan-600 font-semibold"
+      routerLinkActive="active"
+      [routerLink]="['/forgot-password']"
+      >forgot-password</a
+    >
+
+    <!-- form -->
+    <form
+      [formGroup]="validationForm"
+      class="space-y-1 flex flex-col justify-center mt-8"
+    >
+      <!-- email -->
+      <mat-form-field class="w-full">
+        <mat-label>Code</mat-label>
+        <mat-icon matPrefix [fontIcon]="'key'" />
+        <input
+          type="text"
+          matInput
+          [formControlName]="'code'"
+          placeholder="code"
+        />
+        <mat-error>
+          {{ getError('code') }}
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+    <!-- submit -->
+    <button
+      class="w-full mt-4"
+      mat-raised-button
+      color="primary"
+      [disabled]="validationForm.invalid || validationForm.disabled"
+      (click)="onValidation()"
+    >
+      Verify
+    </button>
+  </div>
+</div>

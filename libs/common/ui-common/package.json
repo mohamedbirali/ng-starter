@@ -1,0 +1,10 @@
+{
+  "name": "@common/ui-common",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "@angular/animations": "17.0.0",
+    "@angular/forms": "17.0.0"
+  },
+  "dependencies": {},
+  "sideEffects": false
+}

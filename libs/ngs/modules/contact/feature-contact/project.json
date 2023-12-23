@@ -1,0 +1,27 @@
+{
+  "name": "feature-contact",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ngs/modules/contact/feature-contact/src",
+  "prefix": "ngs",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/ngs/modules/contact/feature-contact/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/ngs/modules/contact/feature-contact/**/*.ts",
+          "libs/ngs/modules/contact/feature-contact/**/*.html"
+        ]
+      }
+    }
+  }
+}

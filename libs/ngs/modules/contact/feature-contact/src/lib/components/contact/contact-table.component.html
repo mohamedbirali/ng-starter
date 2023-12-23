@@ -1,0 +1,11 @@
+<ui-common-table
+  [data$]="contacts$"
+  [columns]="columns"
+  [actions]="actions"
+  [separatedAction]="true"
+  [listName]="'contact'"
+  [tableIcon]="'group'"
+  (emittedAction)="handleAction($event)"
+  (emittedToggling)="toggle($event)"
+  (deleteMany)="deleteMany($event)"
+/>

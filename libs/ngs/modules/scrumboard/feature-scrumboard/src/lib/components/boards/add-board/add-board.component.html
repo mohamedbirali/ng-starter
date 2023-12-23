@@ -1,0 +1,55 @@
+<div
+  mat-dialog-title
+  class="flex flex-0 w-[20rem] md:w-[40rem] items-center justify-between h-16 p-0 sm:pr-5 sm:pl-8 bg-green-100"
+>
+  <div class="text-lg font-medium">Board</div>
+  <button mat-icon-button (click)="matDialogRef.close()" [tabIndex]="-1">
+    <mat-icon class="text-current" [fontIcon]="'close'"></mat-icon>
+  </button>
+</div>
+
+<!-- Board form -->
+<mat-dialog-content class="p-0">
+  <form
+    class="flex flex-col flex-0 items-start w-full p-6 sm:p-8 space-y-6 overflow-y-auto"
+    [formGroup]="boardForm"
+  >
+    <!-- Title -->
+    <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+      <mat-label>Title</mat-label>
+      <textarea
+        matInput
+        [formControlName]="'title'"
+        [rows]="1"
+        cdkTextareaAutosize
+        [cdkAutosizeMinRows]="1"
+      >
+      </textarea>
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        [formControlName]="'description'"
+        [rows]="1"
+        cdkTextareaAutosize
+        [cdkAutosizeMinRows]="1"
+      >
+      </textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    (click)="createBoard()"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    Add board
+  </button>
+</mat-dialog-actions>

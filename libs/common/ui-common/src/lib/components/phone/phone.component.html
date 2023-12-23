@@ -1,0 +1,67 @@
+<div class="w-full flex">
+  <div class="space-y-4 w-full">
+    <ng-container
+      *ngFor="
+        let phoneNumber of phoneNumbers ?? [];
+        let i = index;
+        let first = first;
+        let last = last;
+        trackBy: trackByFn
+      "
+    >
+      <div class="relative flex">
+        <mat-form-field
+          class="flex-auto justify-center items-center"
+          [subscriptSizing]="'dynamic'"
+        >
+          <!-- <mat-label>Phone</mat-label> -->
+          <input
+            matInput
+            [formControl]="phoneNumber.get('phoneNumber')"
+            [placeholder]="'Phone'"
+          />
+          <mat-select
+            class="mr-1.5"
+            [formControl]="phoneNumber.get('country')"
+            matPrefix
+          >
+            <mat-select-trigger>
+              <span class="flex items-center p-2">
+                <span
+                  class="hidden sm:flex w-6 h-4 mr-1 overflow-hidden"
+                  [style.background]="
+                    'url(\'/assets/images/flags.png\') no-repeat 0 0'
+                  "
+                  [style.backgroundSize]="'24px 3876px'"
+                  [style.backgroundPosition]="
+                    getCountryByIso(phoneNumber.get('country')?.value)
+                      ?.flagImagePos
+                  "
+                ></span>
+                <span class="sm:mx-0.5 font-medium text-default">{{
+                  getCountryByIso(phoneNumber.get('country')?.value)?.code
+                }}</span>
+              </span>
+            </mat-select-trigger>
+            <ng-container *ngFor="let country of countries; trackBy: trackByFn">
+              <mat-option [value]="country.iso">
+                <span class="flex items-center">
+                  <span
+                    class="w-6 h-4 overflow-hidden"
+                    [style.background]="
+                      'url(\'/assets/images/flags.png\') no-repeat 0 0'
+                    "
+                    [style.backgroundSize]="'24px 3876px'"
+                    [style.backgroundPosition]="country.flagImagePos"
+                  ></span>
+                  <span class="ml-2">{{ country.name }}</span>
+                  <span class="ml-2 font-medium">{{ country.code }}</span>
+                </span>
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </ng-container>
+  </div>
+</div>

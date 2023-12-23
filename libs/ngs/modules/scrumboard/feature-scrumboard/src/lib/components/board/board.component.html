@@ -1,0 +1,278 @@
+<div class="relative heigh-full flex flex-col min-w-0 overflow-hidden">
+  @if(board?.id) {
+  <mat-drawer-container class="relative h-full" autosize>
+    <mat-drawer
+      class="w-1/3 space-y-2 h-full"
+      #drawer
+      position="end"
+      mode="side"
+    >
+      <!--  -->
+      <form
+        class="flex flex-col flex-0 items-start w-full p-6 sm:p-8 space-y-6 overflow-y-auto"
+        [formGroup]="boardForm"
+      >
+        <!-- Title -->
+        <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+          <mat-label>Title</mat-label>
+          <textarea
+            matInput
+            [formControlName]="'title'"
+            [rows]="1"
+            cdkTextareaAutosize
+            [cdkAutosizeMinRows]="1"
+          >
+          </textarea>
+        </mat-form-field>
+
+        <!-- Description -->
+        <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            [formControlName]="'description'"
+            [rows]="1"
+            cdkTextareaAutosize
+            [cdkAutosizeMinRows]="1"
+          >
+          </textarea>
+        </mat-form-field>
+
+        <!-- Description -->
+        <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+          <mat-label>Icon</mat-label>
+          <input matInput [formControlName]="'icon'" cdkTextareaAutosize />
+          <mat-hint
+            >Fonts name from
+            <a
+              class="text-teal-400"
+              href="https://fonts.google.com/icons"
+              target="_blank"
+              >google icons</a
+            ></mat-hint
+          >
+        </mat-form-field>
+        <div class="w-full flex justify-between">
+          <button
+            class="bg-green-100"
+            mat-stroked-button
+            (click)="updateBoard()"
+          >
+            Update board
+          </button>
+          <button
+            (click)="deleteBoard()"
+            mat-mini-fab
+            aria-label="Delete board"
+            matTooltip="Delete board"
+            matTooltipPosition="left"
+            class="shadow-none"
+          >
+            <mat-icon [fontIcon]="'delete'" />
+          </button>
+        </div>
+      </form>
+    </mat-drawer>
+    <!-- Header -->
+    <div
+      class="static flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent"
+    >
+      <!-- Title -->
+      <div class="flex-1 min-w-0">
+        <h2
+          class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"
+        >
+          {{ board.title }}
+        </h2>
+        <h4>{{ board.description }}</h4>
+      </div>
+      <!-- Actions -->
+      <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+        <a mat-stroked-button [routerLink]="['..']">
+          <mat-icon [fontIcon]="'view_week'"></mat-icon>
+          <span class="ml-2">Boards</span>
+        </a>
+        <button (click)="drawer.toggle()" class="ml-3" mat-stroked-button>
+          <mat-icon class="icon-size-5" [fontIcon]="'settings'"></mat-icon>
+          <span class="ml-2">Settings</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div
+      class="flex-auto relative p-6 h-full sm:p-8 sm:pt-4 overflow-y-auto bg-sky-800 bg-opacity-5"
+      cdkScrollable
+    >
+      <!-- Lists -->
+      <div
+        class="flex"
+        cdkDropList
+        [cdkDropListData]="board.lists"
+        [cdkDropListOrientation]="'horizontal'"
+        (cdkDropListDropped)="listDropped($event)"
+      >
+        <!-- Group all cdkDropList's after this point together so that the cards can be transferred between lists -->
+        <div class="flex items-start" cdkDropListGroup>
+          <!-- List -->
+          <ng-container *ngFor="let list of board.lists; trackBy: trackByFn">
+            <div
+              class="flex-0 w-72 p-2 rounded-2xl"
+              cdkDrag
+              [cdkDragLockAxis]="'x'"
+            >
+              <div class="flex items-center justify-between" cdkDragHandle>
+                <div
+                  class="flex items-center w-full py-2 px-3 rounded-md cursor-text border border-transparent focus-within:bg-white focus-within:shadow-sm focus-within:border-green-200 dark:focus-within:bg-gray-900"
+                >
+                  <input
+                    class="w-full outline-none font-semibold leading-5 bg-transparent"
+                    [spellcheck]="'false'"
+                    [value]="list.title"
+                    (focusout)="updateListTitle($event, list)"
+                    (keydown.enter)="listTitleInput.blur()"
+                    #listTitleInput
+                  />
+                </div>
+                <div
+                  class="flex items-center justify-center p-2 h-6 ml-4 text-sm font-semibold leading-6 rounded-full bg-gray-300 dark:bg-gray-700"
+                >
+                  {{ list?.cards?.length ?? 0 }}
+                </div>
+                <div class="ml-1">
+                  <button mat-icon-button [matMenuTriggerFor]="listMenu">
+                    <mat-icon [fontIcon]="'more_vert'" />
+                  </button>
+                  <mat-menu #listMenu="matMenu">
+                    <button mat-menu-item (click)="renameList(listTitleInput)">
+                      <mat-icon
+                        class="text-gray-300"
+                        [fontIcon]="'edit_square'"
+                      />
+                      Rename list
+                    </button>
+                    <button mat-menu-item (click)="deleteList(list.id!)">
+                      <mat-icon class="text-gray-400" [fontIcon]="'delete'" />
+                      Delete list
+                    </button>
+                  </mat-menu>
+                </div>
+              </div>
+
+              <!-- Cards -->
+              <div
+                class="mt-2 rounded-xl bg-gray-400 bg-opacity-10 dark:bg-transparent dark:border"
+              >
+                <div
+                  [id]="list.id!"
+                  class="p-3 pb-0"
+                  cdkDropList
+                  [cdkDropListData]="list.cards"
+                  (cdkDropListDropped)="cardDropped($event)"
+                >
+                  <!-- Card -->
+                  <ng-container
+                    *ngFor="let card of list.cards; trackBy: trackByFn"
+                  >
+                    <a
+                      class="flex flex-col items-start mb-3 p-5 space-y-3 shadow rounded-lg overflow-hidden bg-white"
+                      [routerLink]="['card', card.id]"
+                      cdkDrag
+                    >
+                      <!-- Cover image -->
+                      <ng-container *ngIf="''">
+                        <div class="-mx-5 -mt-5 mb-2">
+                          <img class="w-full object-cover" [src]="''" />
+                        </div>
+                      </ng-container>
+                      <!-- Title -->
+                      <div class="text-lg font-medium leading-5">
+                        {{ card.title }}
+                      </div>
+                      <!-- Labels -->
+                      <ng-container *ngIf="card?.labels?.length">
+                        <div>
+                          <div class="flex flex-wrap -mx-1 -mb-2">
+                            <ng-container
+                              *ngFor="
+                                let label of card.labels;
+                                trackBy: trackByFn
+                              "
+                            >
+                              <div
+                                class="mx-1 mb-2 py-0.5 px-3 rounded-full text-sm font-medium text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700"
+                              >
+                                {{ label.title }}
+                              </div>
+                            </ng-container>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <!-- Due date -->
+                      <!-- <ng-container *ngIf="card.dueDate">
+                        <div
+                          class="flex items-center rounded text-sm font-medium leading-5 text-secondary"
+                          [ngClass]="{
+                            'text-red-600': isOverdue(card.dueDate)
+                          }"
+                        >
+                          <mat-icon
+                            class="text-current"
+                            [fontIcon]="'schedule'"
+                          ></mat-icon>
+                          <div class="ml-1">
+                            {{ card.dueDate | date : 'longDate' }}
+                          </div>
+                        </div>
+                      </ng-container> -->
+                    </a>
+                  </ng-container>
+                </div>
+
+                <!-- New card -->
+                <feature-scrumboard-board-add-card
+                  (saved)="addCard(list, $event)"
+                  [buttonTitle]="
+                    list?.cards?.length ? 'Add another card' : 'Add a card'
+                  "
+                />
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- New list -->
+          <feature-scrumboard-board-add-list
+            (saved)="addList($event)"
+            [buttonTitle]="
+              board?.lists?.length ? 'Add another list' : 'Add a list'
+            "
+          />
+        </div>
+      </div>
+    </div>
+  </mat-drawer-container>
+
+  } @else {
+  <div
+    class="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto"
+  >
+    <div class="animate-pulse flex space-x-4">
+      <div class="rounded-full bg-slate-700 h-10 w-10"></div>
+      <div class="flex-1 space-y-6 py-1">
+        <div class="h-2 bg-slate-700 rounded"></div>
+        <div class="space-y-3">
+          <div class="grid grid-cols-3 gap-4">
+            <div class="h-2 bg-slate-700 rounded col-span-2"></div>
+            <div class="h-2 bg-slate-700 rounded col-span-1"></div>
+          </div>
+          <div class="h-2 bg-slate-700 rounded"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+<!-- Invisible router-outlet for ScrumboardCard component -->
+<div class="absolute invisible w-0 h-0 opacity-0 pointer-events-none">
+  <router-outlet></router-outlet>
+</div>

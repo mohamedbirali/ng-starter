@@ -1,0 +1,41 @@
+{
+  "name": "ui-common",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/common/ui-common/src",
+  "prefix": "ui-common",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}"
+      ],
+      "options": {
+        "project": "libs/common/ui-common/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/common/ui-common/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/common/ui-common/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "libs/common/ui-common/**/*.ts",
+          "libs/common/ui-common/**/*.html",
+          "libs/common/ui-common/package.json"
+        ]
+      }
+    }
+  }
+}

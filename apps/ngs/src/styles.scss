@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #fbfffb !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  flex-direction: column;
+  height: 100vh !important;
+  width: 100% !important;
+}
+
+.heigh-full {
+  height: calc(100vh - 64px);
+}
+
+ngs-root {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+}

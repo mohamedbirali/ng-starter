@@ -1,0 +1,5 @@
+{
+  "projects": {
+    "default": "ng-starter-monorepo"
+  }
+}
