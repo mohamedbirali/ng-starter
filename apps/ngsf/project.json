@@ -1,32 +1,26 @@
 {
-  "name": "ngs",
+  "name": "ngsf",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "ngs",
-  "sourceRoot": "apps/ngs/src",
+  "sourceRoot": "apps/ngsf/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/ngs",
-        "index": "apps/ngs/src/index.html",
-        "browser": "apps/ngs/src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
-        "tsConfig": "apps/ngs/tsconfig.app.json",
+        "outputPath": "dist/apps/ngsf",
+        "index": "apps/ngsf/src/index.html",
+        "browser": "apps/ngsf/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/ngsf/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/ngs/src/assets"
-        ],
+        "assets": ["apps/ngsf/src/assets"],
         "styles": [
-          "apps/ngs/src/styles.scss",
+          "apps/ngsf/src/styles.scss",
           "@angular/material/prebuilt-themes/indigo-pink.css",
-          "apps/ngs/src/assets/styles/splash-screen.css"
+          "apps/ngsf/src/assets/styles/splash-screen.css"
         ],
         "scripts": []
       },
@@ -64,10 +58,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "ngs:build:production"
+          "buildTarget": "ngsf:build:production"
         },
         "development": {
-          "buildTarget": "ngs:build:development"
+          "buildTarget": "ngsf:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -75,35 +69,28 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "ngs:build"
+        "buildTarget": "ngsf:build"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/ngs/**/*.ts",
-          "apps/ngs/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/ngsf/**/*.ts", "apps/ngsf/**/*.html"]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/ngs/jest.config.ts"
+        "jestConfig": "apps/ngsf/jest.config.ts"
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "ngs:build",
-        "staticFilePath": "dist/apps/ngs/browser"
+        "buildTarget": "ngsf:build",
+        "staticFilePath": "dist/apps/ngsf/browser"
       }
     }
   }

@@ -11,7 +11,8 @@
     "ngs:s:dev": "nx run ngs:serve:development",
     "ngs:s:prod": "nx run ngs:serve:production",
     "ngs:s:ssr": "npx nx run ngs:serve-static",
-    "ngs:b": "npx nx run ngs:build"
+    "ngs:b": "npx nx run ngs:build",
+    "izi:s:dev": "nx run izi:serve:development"
   },
   "private": true,
   "dependencies": {

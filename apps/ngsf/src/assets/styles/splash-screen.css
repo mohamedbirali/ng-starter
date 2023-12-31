@@ -30,7 +30,7 @@ body splash-screen .spinner {
   width: 56px;
 }
 
-body splash-screen .spinner>div {
+body splash-screen .spinner > div {
   width: 12px;
   height: 12px;
   background-color: #1ef7e9;
@@ -51,20 +51,18 @@ body splash-screen .spinner .bounce2 {
 }
 
 @-webkit-keyframes bouncedelay {
-
   0%,
   80%,
   100% {
-    -webkit-transform: scale(0)
+    -webkit-transform: scale(0);
   }
 
   40% {
-    -webkit-transform: scale(1.0)
+    -webkit-transform: scale(1);
   }
 }
 
 @keyframes bouncedelay {
-
   0%,
   80%,
   100% {
@@ -73,8 +71,8 @@ body splash-screen .spinner .bounce2 {
   }
 
   40% {
-    -webkit-transform: scale(1.0);
-    transform: scale(1.0);
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
 }
 

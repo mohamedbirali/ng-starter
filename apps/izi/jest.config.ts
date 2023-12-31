@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'ngs',
+  displayName: 'izi',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/ngs',
+  coverageDirectory: '../../coverage/apps/izi',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

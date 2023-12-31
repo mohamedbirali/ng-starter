@@ -1,0 +1,37 @@
+<h2 class="w-full text-center font-bold">State signal</h2>
+<div class="grid grid-cols-2 gap-5 p-8">
+  <div class="col-span-1 font-bold p-5 rounded-md border">
+    <ng-container *ngFor="let product of listProduct()">
+      <div>
+        {{ product.name }}
+        <span class="font-bold"> ({{ product.price }} dhs) </span>
+        <button
+          appearance="secondary"
+          class="p-2 rounded-md bg-teal-300 text-end mr-2"
+          (click)="updateForm(product)"
+        >
+          update
+        </button>
+        <button
+          appearance="secondary"
+          class="p-2 rounded-md bg-red-300 text-end"
+          (click)="deleteProduct(product.id ?? 1)"
+        >
+          delete
+        </button>
+      </div>
+    </ng-container>
+    <div class="text-end w-full mt-4">total price: {{ totalPrice() }} dhs</div>
+  </div>
+
+  <!-- form -->
+  <form [formGroup]="productForm" class="rounded-md border p-5 space-y-2">
+    <label>Product name </label>
+    <input [formControlName]="productFormProps.NAME" />
+
+    <input [formControlName]="productFormProps.PRICE" />
+    <label> Product price </label>
+
+    <button appearance="secondary" (click)="addProduct()">add / update</button>
+  </form>
+</div>
