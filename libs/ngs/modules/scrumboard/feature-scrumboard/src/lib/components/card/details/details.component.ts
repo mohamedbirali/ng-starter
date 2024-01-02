@@ -1,5 +1,5 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -51,9 +51,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatInputModule,
     TextFieldModule,
     NgClass,
-    NgIf,
     MatDatepickerModule,
-    NgFor,
     MatCheckboxModule,
     MatDialogModule,
     DatePipe,
