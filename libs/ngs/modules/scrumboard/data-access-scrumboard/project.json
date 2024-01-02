@@ -31,14 +31,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/ngs/modules/scrumboard/data-access-scrumboard/**/*.ts",
-          "libs/ngs/modules/scrumboard/data-access-scrumboard/**/*.html",
-          "libs/ngs/modules/scrumboard/data-access-scrumboard/package.json"
-        ]
-      }
+      "outputs": ["{options.outputFile}"]
     }
   }
 }

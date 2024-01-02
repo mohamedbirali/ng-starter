@@ -24,14 +24,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/auth/feature-auth/**/*.ts",
-          "libs/auth/feature-auth/**/*.html",
-          "libs/auth/feature-auth/package.json"
-        ]
-      }
+      "outputs": ["{options.outputFile}"]
     }
   }
 }

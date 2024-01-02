@@ -31,14 +31,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/auth/data-access-auth/**/*.ts",
-          "libs/auth/data-access-auth/**/*.html",
-          "libs/auth/data-access-auth/package.json"
-        ]
-      }
+      "outputs": ["{options.outputFile}"]
     }
   }
 }
