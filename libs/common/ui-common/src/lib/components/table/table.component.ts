@@ -47,14 +47,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  AsyncPipe,
-  NgClass,
-  NgFor,
-  NgIf,
-  NgStyle,
-  TitleCasePipe,
-} from '@angular/common';
+import { AsyncPipe, NgClass, NgStyle, TitleCasePipe } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
 import { fadeInUp400ms, stagger40ms } from '../../animations';
 import { ImageComponent } from '../image/image.component';
@@ -65,7 +58,6 @@ export type Avatars = { name?: string };
   selector: 'ui-common-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  // providers: [TableService],
   animations: [stagger40ms, fadeInUp400ms],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -94,8 +86,6 @@ export type Avatars = { name?: string };
     CdkTableModule,
     ReactiveFormsModule,
     FormsModule,
-    NgIf,
-    NgFor,
     NgClass,
     NgStyle,
   ],

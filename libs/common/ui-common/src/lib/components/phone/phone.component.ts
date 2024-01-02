@@ -1,5 +1,5 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -46,12 +46,10 @@ export interface Country {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
-    NgIf,
     MatButtonModule,
     MatTooltipModule,
     RouterLink,
     MatIconModule,
-    NgFor,
     FormsModule,
     ReactiveFormsModule,
     MatRippleModule,

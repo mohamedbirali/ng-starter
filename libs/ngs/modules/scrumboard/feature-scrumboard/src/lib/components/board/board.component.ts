@@ -5,10 +5,9 @@ import {
   CdkDropList,
   CdkDropListGroup,
   moveItemInArray,
-  transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -61,12 +60,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     CdkScrollable,
     CdkDropList,
     CdkDropListGroup,
-    NgFor,
     CdkDrag,
     CdkDragHandle,
     MatMenuModule,
     MatTooltipModule,
-    NgIf,
     NgClass,
     ScrumboardBoardAddCardComponent,
     ScrumboardBoardAddListComponent,
