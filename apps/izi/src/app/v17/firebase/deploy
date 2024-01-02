@@ -1,0 +1,8 @@
+firebase experiments:enable webframeworks
+firebase init hosting
+firebase deploy
+
+or
+
+ng add @angular/fire
+ng deploy

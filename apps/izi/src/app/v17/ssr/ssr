@@ -1,0 +1,3 @@
+ng new my-app --ssr
+
+ng add @angular/ssr

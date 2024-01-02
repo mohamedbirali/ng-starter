@@ -1,0 +1,17 @@
+@if (loggedIn) {
+  The user is logged in
+} @else {
+  The user is not logged in
+}
+
+@for (user of users; track user.id) {
+  {{ user.name }}
+} @empty {
+  Empty list of users
+}
+
+@switch (accessLevel) {
+  @case ('admin') { <admin-dashboard/> }
+  @case ('moderator') { <moderator-dashboard/> }
+  @default { <user-dashboard/> }
+}

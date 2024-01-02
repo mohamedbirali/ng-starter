@@ -1,0 +1,19 @@
+@Component({
+  selector: 'my-chart-cmp',
+  template: `<div #chart>{{ ... }}</div>`,
+})
+export class MyChartCmp {
+  @ViewChild('chart') chartRef: ElementRef;
+  chart: MyChart | null;
+
+  constructor() {
+    // afterRender()
+
+    afterNextRender(
+      () => {
+        this.chart = new MyChart(this.chartRef.nativeElement);
+      },
+      { phase: AfterRenderPhase.Write },
+    );
+  }
+}

@@ -1,0 +1,36 @@
+@defer (on viewport) {
+<comment-list />
+} @placeholder {
+
+  <!-- A placeholder content to show until the comments load -->
+  <img src="comments-placeholder.png">
+}
+In the example above, Angular first renders the contents of the placeholder block. When it becomes visible in the viewport, the loading of the <comment-list/> component starts. Once the loading is completed, Angular removes the placeholder and renders the component.
+
+There are also blocks for loading and error states:
+
+@defer (on viewport) {
+<comment-list/>
+} @loading {
+Loading…
+} @error {
+Loading failed :(
+} @placeholder {
+<img src="comments-placeholder.png">
+}
+That’s it! There’s a ton of complexity under the hood that Angular manages for you.
+
+Deferrable views offer a few more triggers:
+
+on idle — lazily load the block when the browser is not doing any heavy lifting
+on immediate — start lazily loading automatically, without blocking the browser
+on timer(<time>) — delay loading with a timer
+on viewport and on viewport(<ref>) — viewport also allows to specify a reference for an anchor element. When the anchor element is visible, Angular will lazily load the component and render it
+on interaction and on interaction(<ref>) — enables you to initiate lazy loading when the user interacts with a particular element
+on hover and on hover(<ref>) — triggers lazy loading when the user hovers an element
+when <expr> — enables you to specify your own condition via a boolean expression
+Deferrable views also provide the ability to prefetch the dependencies ahead of rendering them. Adding prefetching is as simple as adding a prefetch statement to the defer block and supports all the same triggers.
+
+@defer (on viewport; prefetch on idle) {
+<comment-list />
+}
