@@ -18,13 +18,14 @@ import { RouterModule } from '@angular/router';
 })
 export class AppComponent {
   routes = [
-    'signal',
-    'form-signal',
-    'state-signal',
-    'render',
-    'ng-container', // ngIf, *ngFor
-    'destroy',
-    'destroy-parent',
-    'input',
+    'users',
+    // 'signal',
+    // 'form-signal',
+    // 'state-signal',
+    // 'render',
+    // 'ng-container', // ngIf, *ngFor
+    // 'destroy',
+    // 'destroy-parent',
+    // 'input',
   ];
 }

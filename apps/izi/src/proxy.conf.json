@@ -1,0 +1,11 @@
+{
+  "/users": {
+    "target": {
+      "host": "https://jsonplaceholder.typicode.com",
+      "protocol": "https:"
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

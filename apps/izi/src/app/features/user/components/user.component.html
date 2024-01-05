@@ -1,0 +1,13 @@
+@if(users.length > 0) {
+<div class="text-center w-full underline font-bold">
+  {{ users.length }} users from placeholder's api
+</div>
+}
+
+<div class="p-4 w-full grid grid-cols-5 gap-5">
+  @for (user of users; track user.id) {
+  <div class="bg-gray-800 text-teal-50 p-3 border rounded-md">
+    {{ user.email }}
+  </div>
+  }
+</div>

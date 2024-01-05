@@ -8,16 +8,25 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/izi",
         "index": "apps/izi/src/index.html",
         "browser": "apps/izi/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/izi/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/izi/src/favicon.ico", "apps/izi/src/assets"],
-        "styles": ["apps/izi/src/styles.scss"],
+        "assets": [
+          "apps/izi/src/favicon.ico",
+          "apps/izi/src/assets"
+        ],
+        "styles": [
+          "apps/izi/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -52,6 +61,9 @@
         },
         "development": {
           "buildTarget": "izi:build:development"
+        },
+        "options": {
+          "proxyConfig": "apps/izi/src/proxy.conf.json"
         }
       },
       "defaultConfiguration": "development"
@@ -64,11 +76,15 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/izi/jest.config.ts"
       }

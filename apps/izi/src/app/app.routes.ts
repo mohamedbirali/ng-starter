@@ -1,7 +1,18 @@
 import { Route } from '@angular/router';
 import { inputResolver } from './v16/input/input.resolver';
+import { usersResolver } from './features/user/resolvers/user.resolver';
 
 export const appRoutes: Route[] = [
+  {
+    path: 'users',
+    loadComponent: () =>
+      import('./features/user/components/user.component').then(
+        (c) => c.UserComponent,
+      ),
+    resolve: {
+      users: usersResolver,
+    },
+  },
   {
     path: 'signal',
     loadComponent: () =>
